@@ -4,6 +4,7 @@ const bot = new Discord.Client({ws: {intents: Discord.Intents.All}});
 var useless = 0;
 const config = require('./config.json'); 
 const command = require('./command');
+//const privateMessage = require('./PrivateMessage');
  var { prefix } = require('./config.json');
 const firstMessage = require('./first-message');
 
@@ -14,9 +15,28 @@ bot.on('ready' ,() =>
 
     bot.user.setPresence({
         activity: {
-          name: `${prefix}help |BOT UNDER TESTING`,
+          name: `${prefix}help | Kicking Abdul's Ass`,
           type: 0,
         }
+    })
+
+   // privateMessage(bot, 'gae', "stfu bitch");
+
+    command(bot, "channelCreate", message => 
+    {
+      if (message.member.hasPermission('Mod'))
+      {
+        const name = message.content.replace('%channelCreate ', '')
+        message.guild.channels.create(name, 
+        {
+          type: 'text'
+        }).then((channel) => 
+        {
+          const categoryID = "840612087369433150"
+          channel.setParent(categoryID);
+        })
+      }
+      else {"You Don't have Perms, contact Server Admin"}
     })
 
     command(bot, 'msg', message => 
@@ -25,26 +45,44 @@ bot.on('ready' ,() =>
         firstMessage(bot, '816512293872730142' , content, ['🔥' ,'😜'])
     })
 
-    command(bot, "ping", message => 
-    {
-        message.channel.send("pong");
-    })
-
     command(bot, "server", message =>
     {
         bot.guilds.cache.forEach((guild) => {
             message.channel.send(`${guild.name} has a total of ${guild.memberCount} members`);
         })
+            const {guild} = message;
+            const {name, region, memberCount, owner} = guild
+
+            const embed = new Discord.MessageEmbed()
+            .setColor("#39FF14")
+            .setTitle(`Server info for ${guild.name}`)
+            .addFields (
+              {
+                name: "Region",
+                value: region
+              },
+              {
+                name: "Member Count",
+                value: memberCount
+              },
+              {
+                name: "Owner Name",
+                value: owner.user.tag
+              }
+            )
+            message.channel.send(embed);
     })
 
     command(bot, ["cc", "clear"], message => 
-    {
-        if (message.member.hasPermission('ADMINISTRATOR' || 'Mod')) {
+    { {
+      if (message.member.hasPermission("useless")){
+
             message.channel.messages.fetch().then((results) => {
                 message.channel.bulkDelete(results);
             })
         }
-    })
+    }
+  })
 
     command(bot, 'status', (message) => {
         const content = message.content.replace('%status ', '')
@@ -71,7 +109,7 @@ bot.on('ready' ,() =>
         { name: `${prefix}help`, value: "Makes the bot show this msg"},
         { name: `${prefix}server`, value: "Makes the bot show which servers it is in their members"},
         { name: `${prefix}cc or clear`, value: "Clears a part of the channel (MOD ONLY)"},
-        { name: `${prefix}msg <value>`, value: "Sends Message of what u type in the channel"},
+        { name: `${prefix}msg <value>`, value: "Sends Message of what u type in the General Chat"},
         { name: `${prefix}changePrefix`, value: "Allows you to change prefix (TESTING)"},
         )
 
