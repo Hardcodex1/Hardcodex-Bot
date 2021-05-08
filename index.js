@@ -73,3 +73,5 @@ bot.on('guildMemberAdd' , (member) =>
 //BOT TOKEN DO NOT TOUCH
 bot.login(config.token);
 
+//jkajdkj
+
