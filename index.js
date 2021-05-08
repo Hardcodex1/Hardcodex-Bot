@@ -51,6 +51,24 @@ bot.on('ready' ,() =>
       })
 })
 
+bot.on('guildMemberAdd' , (member) =>
+{
+   let embed = new Discord.MessageEmbed()
+   .setTitle('Welcome To Melon Memes')
+   .setThumbnail("https://images.app.goo.gl/6taNx5tefP2DaHwo6")
+   .setColor("#00FFFF")
+   .setImage("https://images.app.goo.gl/6taNx5tefP2DaHwo6")
+   .setDescription("We Are A very Happy Community Remember to stay active and laugh")
+   .addFields(
+   { name: "Rule 1", value: "Stay Active"},
+   { name: "Rule 2", value: "Post Memes"},
+   { name: "Rule 2", value: "Choose Yours Roles from #self-role"},
+   { name: "Rule 3", value: "Be Good"}
+   )
+
+   member.message.send(embed);
+})
+
 
 //BOT TOKEN DO NOT TOUCH
 bot.login(config.token);
