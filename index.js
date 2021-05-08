@@ -47,9 +47,9 @@ bot.on('ready' ,() =>
 
     command(bot, "server", message =>
     {
-        bot.guilds.cache.forEach((guild) => {
-            message.channel.send(`${guild.name} has a total of ${guild.memberCount} members`);
-        })
+        //bot.guilds.cache.forEach((guild) => {
+            //message.channel.send(`${guild.name} has a total of ${guild.memberCount} members`);
+        //})
             const {guild} = message;
             const {name, region, memberCount, owner} = guild
 
@@ -95,6 +95,55 @@ bot.on('ready' ,() =>
           },
         })
       })
+
+      command(bot, 'ban', (message) => {
+        const { member, mentions } = message
+    
+        const tag = `<@${member.id}>`
+    
+        if (
+          member.hasPermission('ADMINISTRATOR') ||
+          member.hasPermission('BAN_MEMBERS')
+        ) {
+          const target = mentions.users.first()
+          if (target) {
+            const targetMember = message.guild.members.cache.get(target.id)
+            targetMember.ban()
+            message.channel.send(`${target} has been banned by ${tag}`)
+          } else {
+            message.channel.send(`${tag} Stfu and tell who to ban first.`)
+          }
+        } else {
+          message.channel.send(
+            `${tag} You do not have permission to use this command.Stfu and get lost.`
+          )
+        }
+      })
+
+      command(bot, 'kick', (message) => {
+        const { member, mentions } = message
+    
+        const tag = `<@${member.id}>`
+    
+        if (
+          member.hasPermission('ADMINISTRATOR') ||
+          member.hasPermission('BAN_MEMBERS')
+        ) {
+          const target = mentions.users.first()
+          if (target) {
+            const targetMember = message.guild.members.cache.get(target.id)
+            targetMember.kick()
+            message.channel.send(`${target} has been kicked by ${tag}`)
+          } else {
+            message.channel.send(`${tag} Stfu and tell who to kick first.`)
+          }
+        } else {
+          message.channel.send(
+            `${tag} You do not have permission to use this command. Stfu and get lost.`
+          )
+        }
+      })
+
 
       command(bot, 'help', message =>
       {
