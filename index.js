@@ -4,12 +4,16 @@ const bot = new Discord.Client({ws: {intents: Discord.Intents.All}});
 var useless = 0;
 const config = require('./config.json'); 
 const command = require('./command');
-//const privateMessage = require('./PrivateMessage');
+const privateMessage = require('./PrivateMessage');
  var { prefix } = require('./config.json');
 const firstMessage = require('./first-message');
+const tempMsg = require('./msgDelete');
+const mongo = require('./mongo')
+const welcome = require('./welcome');
+const messageCounts = require('./message-counts');
 
 //TO KNOW WHEN BOT IS ONLINE
-bot.on('ready' ,() => 
+bot.on('ready' , async () => 
 {
     console.log("BOT ONLINE, PROCEED TO DISCORD");
 
@@ -20,7 +24,19 @@ bot.on('ready' ,() =>
         }
     })
 
-   // privateMessage(bot, 'gae', "stfu bitch");
+    await mongo().then((mongoose) => {
+      try {
+        console.log('Connected to mongo!')
+      } finally {
+        mongoose.connection.close()
+      }
+    })
+
+    welcome(bot)
+
+    messageCounts(bot);
+
+    privateMessage(bot, 'abdul', ["Indeed Abdul is gae, its scientifically proven", 'Ohh Abdul, ik that guy, he is gae', 'Abdul the gae boy', 'abdul? dont take that name again lol', 'dont take that name here again', 'he gae', 'why, why would u say that name']);
 
     command(bot, "channelCreate", message => 
     {
@@ -38,6 +54,17 @@ bot.on('ready' ,() =>
       }
       else {"You Don't have Perms, contact Server Admin"}
     })
+
+    ///command(bot, "tempMsg", message => 
+   // {
+     // var content = message.content.replace('%tempMsg ', '')
+    //  message.channel.send("Enter Time Duration")
+    //  var time = message
+    //  message.channel.send(`Sending ${content} for ${time}s`)
+    //  const guild = client.guilds.cache.get('816374451482001418')
+    //  const channel = guild.channels.cache.get('816512293872730142')
+    //  tempMsg(channel, content, time)
+   // })
 
     command(bot, 'msg', message => 
     {
@@ -75,7 +102,7 @@ bot.on('ready' ,() =>
 
     command(bot, ["cc", "clear"], message => 
     { {
-      if (message.member.hasPermission("useless")){
+      if (message.member.hasPermission("ADMINISTRATOR")){
 
             message.channel.messages.fetch().then((results) => {
                 message.channel.bulkDelete(results);
@@ -156,9 +183,11 @@ bot.on('ready' ,() =>
         .addFields(
         { name: `${prefix}hello`, value: "Makes the bot Say Hello Simple"},
         { name: `${prefix}help`, value: "Makes the bot show this msg"},
-        { name: `${prefix}server`, value: "Makes the bot show which servers it is in their members"},
-        { name: `${prefix}cc or clear`, value: "Clears a part of the channel (MOD ONLY)"},
+        { name: `${prefix}server`, value: "Makes the bot show Details of server"},
+        { name: `${prefix}cc or clear`, value: "Clears a part of the channel (ADMIN AND MOD ONLY)"},
         { name: `${prefix}msg <value>`, value: "Sends Message of what u type in the General Chat"},
+        { name: `${prefix}ban <tag of person>`, value: "Bans the tagged person (ADMIN AND MOD ONLY)"},
+        { name: `${prefix}kick <tag of person>`, value: "kicks the tagged person (ADMIN AND MOD ONLY"},
         { name: `${prefix}changePrefix`, value: "Allows you to change prefix (TESTING)"},
         )
 
