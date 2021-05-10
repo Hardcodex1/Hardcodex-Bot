@@ -1,5 +1,6 @@
 {
 "token" : "ODQwMTcwNjE0NTQyNjk2NDY4.YJUT3A.fIGfrkc-QQGumwe8fIA0YlUaMxI",
 "prefix":  "%",
-"mongoPath": "mongodb://localhost:27017/discordBot"
+"mongoPath": "mongodb://localhost:27017/discordBot",
+"redisPath": "//redis-15929.c14.us-east-1-2.ec2.cloud.redislabs.com:15929?password=rmqcgtgBjhwbbeEW0brxmLpkGZnQnitj"
 } 

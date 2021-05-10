@@ -11,6 +11,9 @@ const tempMsg = require('./msgDelete');
 const mongo = require('./mongo')
 const welcome = require('./welcome');
 const messageCounts = require('./message-counts');
+const mute = require('./mute')
+const timmedMsg = require('./timmedMsg')
+
 
 //TO KNOW WHEN BOT IS ONLINE
 bot.on('ready' , async () => 
@@ -32,11 +35,16 @@ bot.on('ready' , async () =>
       }
     })
 
+    mute(bot)
+
     welcome(bot)
 
     messageCounts(bot);
 
-    privateMessage(bot, 'abdul', ["Indeed Abdul is gae, its scientifically proven", 'Ohh Abdul, ik that guy, he is gae', 'Abdul the gae boy', 'abdul? dont take that name again lol', 'dont take that name here again', 'he gae', 'why, why would u say that name']);
+    
+        timmedMsg(bot)
+
+    //privateMessage(bot, 'abdul', ["Indeed Abdul is gae, its scientifically proven", 'Ohh Abdul, ik that guy, he is gae', 'Abdul the gae boy', 'abdul? dont take that name again lol', 'dont take that name here again', 'he gae', 'why, why would u say that name']);
 
     command(bot, "channelCreate", message => 
     {
@@ -69,7 +77,7 @@ bot.on('ready' , async () =>
     command(bot, 'msg', message => 
     {
         const content = message.content.replace('%msg ', '')
-        firstMessage(bot, '816512293872730142' , content, ['🔥' ,'😜'])
+        firstMessage(bot, '840831283617333280' , content, ['🔥' ,'😜'])
     })
 
     command(bot, "server", message =>
@@ -187,7 +195,9 @@ bot.on('ready' , async () =>
         { name: `${prefix}cc or clear`, value: "Clears a part of the channel (ADMIN AND MOD ONLY)"},
         { name: `${prefix}msg <value>`, value: "Sends Message of what u type in the General Chat"},
         { name: `${prefix}ban <tag of person>`, value: "Bans the tagged person (ADMIN AND MOD ONLY)"},
-        { name: `${prefix}kick <tag of person>`, value: "kicks the tagged person (ADMIN AND MOD ONLY"},
+        { name: `${prefix}kick <tag of person>`, value: "kicks the tagged person (ADMIN AND MOD ONLY)"},
+        { name: `${prefix}mute <tag of person> <time> <format m,h,d>`, value: "mutes the tagged person (ADMIN AND MOD ONLY)"},
+        { name: `${prefix}%setMsg`, value: "Sets a 2 hour loop (Use for bump msgs )"},
         { name: `${prefix}changePrefix`, value: "Allows you to change prefix (TESTING)"},
         )
 
