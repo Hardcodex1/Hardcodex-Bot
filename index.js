@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const client = new Discord.Client();
 const bot = new Discord.Client({ws: {intents: Discord.Intents.All}});
 var useless = 0;
-const config = require('./config.json'); 
+//const config = require('./config.json'); 
 const command = require('./command');
 const privateMessage = require('./PrivateMessage');
  var { prefix } = require('./config.json');
@@ -13,6 +13,7 @@ const welcome = require('./welcome');
 const messageCounts = require('./message-counts');
 const mute = require('./mute')
 const timmedMsg = require('./timmedMsg')
+require('dotenv').config();
 
 
 //TO KNOW WHEN BOT IS ONLINE
@@ -223,5 +224,5 @@ bot.on('ready' , async () =>
 
 
 //BOT TOKEN DO NOT TOUCH
-bot.login(config.token);
+bot.login(process.env.BOT_TOKEN);
 
