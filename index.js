@@ -28,13 +28,13 @@ bot.on('ready' , async () =>
         }
     })
 
-    await mongo().then((mongoose) => {
-      try {
-        console.log('Connected to mongo!')
-      } finally {
-        mongoose.connection.close()
-      }
-    })
+    //await mongo().then((mongoose) => {
+      //try {
+       // console.log('Connected to mongo!')
+     // } finally {
+      //  mongoose.connection.close()
+     // }
+    //})
 
     mute(bot)
 
