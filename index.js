@@ -14,6 +14,7 @@ const tempMsg = require('./msgDelete');
 const mute = require('./mute')
 const timmedMsg = require('./timmedMsg')
 require('dotenv').config();
+const warning = require("./warning")
 
 
 //TO KNOW WHEN BOT IS ONLINE
@@ -37,6 +38,8 @@ bot.on('ready' , async () =>
     //})
 
     mute(bot)
+
+    warning(bot)
 
     //welcome(bot)
 
@@ -199,6 +202,9 @@ bot.on('ready' , async () =>
         { name: `${prefix}kick <tag of person>`, value: "kicks the tagged person (ADMIN AND MOD ONLY)"},
         { name: `${prefix}mute <tag of person> <time> <format m,h,d>`, value: "mutes the tagged person (ADMIN AND MOD ONLY)"},
         { name: `${prefix}%setMsg`, value: "Sets a 2 hour loop (Use for bump msgs )"},
+        { name: `${prefix}%warn <user> <reason>`, value: "Warns the user )"},
+        { name: `${prefix}%delWarn <user> <warn number>`, value: "Deletes the warning )"},
+        { name: `${prefix}%viewWarn <user> <warn number>`, value: "Ability to view a particullar warning)"},
         { name: `${prefix}changePrefix`, value: "Allows you to change prefix (TESTING)"},
         )
 

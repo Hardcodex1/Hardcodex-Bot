@@ -28,6 +28,7 @@ module.exports = (client) => {
     const role = getRole(member.guild)
     if (role) {
       member.roles.add(role)
+    message.channel.send("Muted")
       console.log('Muted ' + member.id)
     }
   }
@@ -98,6 +99,7 @@ module.exports = (client) => {
     try {
       const redisKey = `${redisKeyPrefix}${id}-${guild.id}`
     redisClient.del(redisKey)
+    message.channel.send("Unmuted")
     } finally {
       redisClient.quit()
     }
