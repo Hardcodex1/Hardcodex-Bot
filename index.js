@@ -8,9 +8,9 @@ const privateMessage = require('./PrivateMessage');
  var { prefix } = require('./config.json');
 const firstMessage = require('./first-message');
 const tempMsg = require('./msgDelete');
-const mongo = require('./mongo')
-const welcome = require('./welcome');
-const messageCounts = require('./message-counts');
+//const mongo = require('./mongo')
+//const welcome = require('./welcome');
+//const messageCounts = require('./message-counts');
 const mute = require('./mute')
 const timmedMsg = require('./timmedMsg')
 require('dotenv').config();
@@ -38,9 +38,9 @@ bot.on('ready' , async () =>
 
     mute(bot)
 
-    welcome(bot)
+    //welcome(bot)
 
-    messageCounts(bot);
+    //messageCounts(bot);
 
     
         timmedMsg(bot)
