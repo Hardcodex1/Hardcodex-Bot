@@ -17,6 +17,7 @@ module.exports = (client) => {
       const role = getRole(guild)
 
       member.roles.remove(role)
+      message.channel.send("User was unmuted")
     }
   })
 
@@ -24,11 +25,10 @@ module.exports = (client) => {
     return guild.roles.cache.find((role) => role.name === 'Muted')
   }
 
-  const giveRole = (member) => {
+  const giveRole = (member, message) => {
     const role = getRole(member.guild)
     if (role) {
       member.roles.add(role)
-    message.channel.send("Muted")
       console.log('Muted ' + member.id)
     }
   }
@@ -50,7 +50,7 @@ module.exports = (client) => {
         if (err) {
           console.error('Redis GET error:', err)
         } else if (result) {
-          giveRole(member)
+          giveRole(member, message)
         } else {
           console.log('The user is not muted') 
         }
@@ -169,6 +169,8 @@ module.exports = (client) => {
 
     const targetMember = guild.members.cache.get(id)
     giveRole(targetMember)
+    target.send("U Have Been Muted")
+    console.log(target)
 
     const redisClient = await redis()
     try {
@@ -176,6 +178,7 @@ module.exports = (client) => {
 
       if (seconds > 0) {
         redisClient.set(redisKey, 'true', 'EX', seconds)
+        message.channel.send(`User has been muted for ${duration} ${durationType}`)
       } else {
         redisClient.set(redisKey, 'true')
       }

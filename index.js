@@ -15,6 +15,7 @@ const mute = require('./mute')
 const timmedMsg = require('./timmedMsg')
 require('dotenv').config();
 const warning = require("./warning")
+const suggest = require("./suggestion")
 
 
 //TO KNOW WHEN BOT IS ONLINE
@@ -44,6 +45,7 @@ bot.on('ready' , async () =>
     //welcome(bot)
 
     //messageCounts(bot);
+    suggest(bot)
 
     
         timmedMsg(bot)
@@ -81,7 +83,7 @@ bot.on('ready' , async () =>
     command(bot, 'msg', message => 
     {
         const content = message.content.replace('%msg ', '')
-        firstMessage(bot, '840831283617333280' , content, ['🔥' ,'😜'])
+        firstMessage(bot, '842111881077456927' , content, ['🔥' ,'😜'])
     })
 
     command(bot, "server", message =>
@@ -149,6 +151,7 @@ bot.on('ready' , async () =>
             const targetMember = message.guild.members.cache.get(target.id)
             targetMember.ban()
             message.channel.send(`${target} has been banned by ${tag}`)
+            message.target.send("You Have Been Banned")
           } else {
             message.channel.send(`${tag} Stfu and tell who to ban first.`)
           }
@@ -173,6 +176,7 @@ bot.on('ready' , async () =>
             const targetMember = message.guild.members.cache.get(target.id)
             targetMember.kick()
             message.channel.send(`${target} has been kicked by ${tag}`)
+            message.target.send("You Have Been kicked")
           } else {
             message.channel.send(`${tag} Stfu and tell who to kick first.`)
           }
@@ -201,10 +205,11 @@ bot.on('ready' , async () =>
         { name: `${prefix}ban <tag of person>`, value: "Bans the tagged person (ADMIN AND MOD ONLY)"},
         { name: `${prefix}kick <tag of person>`, value: "kicks the tagged person (ADMIN AND MOD ONLY)"},
         { name: `${prefix}mute <tag of person> <time> <format m,h,d>`, value: "mutes the tagged person (ADMIN AND MOD ONLY)"},
-        { name: `${prefix}%setMsg`, value: "Sets a 2 hour loop (Use for bump msgs )"},
-        { name: `${prefix}%warn <user> <reason>`, value: "Warns the user )"},
-        { name: `${prefix}%delWarn <user> <warn number>`, value: "Deletes the warning )"},
-        { name: `${prefix}%viewWarn <user> <warn number>`, value: "Ability to view a particullar warning)"},
+        { name: `${prefix}setMsg`, value: "Sets a 2 hour loop (Use for bump msgs )"},
+        { name: `${prefix}warn <user> <reason>`, value: "Warns the user )"},
+        { name: `${prefix}delWarn <user> <warn number>`, value: "Deletes the warning )"},
+        { name: `${prefix}suggest <suggestion>`, value: "Sends Suggestion In Concerned Channel )"},
+        { name: `${prefix}viewWarn <user> <warn number>`, value: "Ability to view a particullar warning)"},
         { name: `${prefix}changePrefix`, value: "Allows you to change prefix (TESTING)"},
         )
 

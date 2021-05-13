@@ -31,7 +31,7 @@ module.exports = async (bot) =>
                     createWarn(message)
                     console.log(`User: ${warnId} Warned for Reason ${reason}`)
                     channel.send(`User has total ${warnNumber} warnings`)
-                    channel.send(`User: ${warnId} Warned for Reason ${reason}`)
+                    channel.send(`User: <@${warnId}> Warned for Reason ${reason}`)
                 }
             })
         }finally{
@@ -255,6 +255,7 @@ module.exports = async (bot) =>
     console.log('Reason: ', reason)
 
     checkWarn(message);
+    message.target.send(`You Have Benn Warned for Reason: ${reason}`)
 
     })
 
