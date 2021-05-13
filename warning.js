@@ -342,7 +342,7 @@ module.exports = async (bot) =>
 
     console.log('ID:', id)
 
-    printWarns(message)
+    printWarns(message);
 
     })
 }

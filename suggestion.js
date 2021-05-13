@@ -39,7 +39,7 @@ module.exports = (client) => {
         .setColor("#1F51FF")
         .setDescription(`${suggestion}`);
 
-  firstMessage(client, channelId, embed, reactions)
+  firstMessage(client, channelId, embed, reactions);
     })
   
 }

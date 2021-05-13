@@ -16,6 +16,7 @@ const timmedMsg = require('./timmedMsg')
 require('dotenv').config();
 const warning = require("./warning")
 const suggest = require("./suggestion")
+var blabla
 
 
 //TO KNOW WHEN BOT IS ONLINE

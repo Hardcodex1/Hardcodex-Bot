@@ -103,7 +103,7 @@ module.exports = async (bot) =>
         const sendMessage = message => 
         {
           if (i >= 2){
-            message.channel.send(reqContent)
+            message.channel.send(reqContent);
           }
         }
 }
