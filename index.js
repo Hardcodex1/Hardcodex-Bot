@@ -16,7 +16,7 @@ const timmedMsg = require('./timmedMsg')
 require('dotenv').config();
 const warning = require("./warning")
 const suggest = require("./suggestion")
-var blabla
+const msgCount = require("./messageCounter")
 
 
 //TO KNOW WHEN BOT IS ONLINE
@@ -42,6 +42,8 @@ bot.on('ready' , async () =>
     mute(bot)
 
     warning(bot)
+
+    msgCount(bot)
 
     //welcome(bot)
 
